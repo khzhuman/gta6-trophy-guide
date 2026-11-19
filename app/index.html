@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14121e">
+  <meta name="description" content="An independent, offline GTA VI trophy guide and tracker. Your route to all 55 PlayStation 5 trophies.">
+  <title>PLATINUM PATH — GTA VI Trophy Guide</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preload" href="./src/data.js" as="script">
+  <link rel="preload" href="./src/tracker.js" as="script">
+  <link rel="preload" href="./src/ui.js" as="script">
+  <script src="./src/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to the trophy guide</a>
+  <svg class="icon-definitions" aria-hidden="true">
+    <symbol id="icon-trophy" viewBox="0 0 24 24"><path d="M7 3h10v5c0 4-2 6-5 6S7 12 7 8V3Z M7 5H3v3c0 3 2 4 5 4 M17 5h4v3c0 3-2 4-5 4 M12 14v5 M8 21h8 M9 19h6"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12 m-5-5 5 5 5-5 M4 16v5h16v-5"/></symbol>
+    <symbol id="icon-upload" viewBox="0 0 24 24"><path d="M12 16V4 m-5 5 5-5 5 5 M4 16v5h16v-5"/></symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24"><path d="m3 6 1 1 2-2 M10 6h11 m-18 6 1 1 2-2 M10 12h11 m-18 6 1 1 2-2 M10 18h11"/></symbol>
+    <symbol id="icon-route" viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 5h8a4 4 0 0 1 0 8H9a4 4 0 0 0 0 8h8"/></symbol>
+    <symbol id="icon-flag" viewBox="0 0 24 24"><path d="M5 21V3 m0 1h14l-3 4 3 4H5"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3 M12 14v3"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16 m-6-6 6 6-6 6"/></symbol>
+  </svg>
+
+  <div class="page-shell">
+    <header>
+      <div class="masthead">
+        <div class="identity">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M10 27V9h9a7 7 0 0 1 0 14h-5 M15 27V14h4a2 2 0 0 1 0 4h-4"/></svg></span>
+          <div><span class="brand-name">PLATINUM PATH</span><span class="brand-caption">THE INDEPENDENT FIELD GUIDE</span></div>
+        </div>
+        <div class="utility-bar">
+          <span id="save-status" class="save-status" role="status"><span class="status-dot"></span><span id="save-status-text">Saved on this device</span></span>
+          <button id="export-button" class="button button-quiet" type="button" aria-label="Export progress as JSON"><svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg><span>Export</span></button>
+          <button id="import-button" class="button button-quiet" type="button" aria-label="Import progress from JSON"><svg class="icon" aria-hidden="true"><use href="#icon-upload"></use></svg><span>Import</span></button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="platform-tag">PS5</span> GRAND THEFT AUTO VI <span class="eyebrow-separator">/</span> TROPHY GUIDE</p>
+          <h1>PLATINUM <span>PATH<span class="title-period">.</span></span></h1>
+          <p class="hero-subtitle">Every trophy. A clear route. <span>Make every session count.</span></p>
+          <div class="hero-statline">
+            <div id="grade-summary" class="grade-summary" aria-label="Progress by trophy grade"></div>
+            <p id="missable-summary" class="missable-summary"><svg class="icon" aria-hidden="true"><use href="#icon-flag"></use></svg><span><strong>18</strong> first-pass warnings</span></p>
+          </div>
+        </div>
+        <section class="progress-summary" aria-label="Your trophy progress">
+          <div id="progress-orbit" class="progress-orbit" role="progressbar" aria-label="Trophies earned" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0">
+            <div class="orbit-inner"><strong id="progress-percent">0<span>%</span></strong><span class="orbit-caption">COMPLETE</span></div>
+          </div>
+          <div class="progress-copy">
+            <p class="eyebrow">YOUR PLATINUM, IN PROGRESS</p>
+            <p class="earned-total"><strong id="earned-count">0</strong><span>/ <span id="total-count">55</span></span></p>
+            <p class="earned-caption">trophies earned</p>
+            <p id="next-stage" class="next-stage"><span>Next stop</span> Story first, eyes open</p>
+          </div>
+        </section>
+      </div>
+
+      <nav id="route-preview" class="route-preview" aria-label="Five-stage platinum route"></nav>
+    </header>
+
+    <div id="app-status" class="app-status" role="status" hidden></div>
+
+    <section class="controls" aria-label="Find and filter trophies">
+      <div class="search-row">
+        <div class="search-box">
+          <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+          <label class="sr-only" for="trophy-search">Search trophies, descriptions and guides</label>
+          <input id="trophy-search" type="search" placeholder="Find a trophy, activity or requirement…" autocomplete="off" spellcheck="false">
+          <button id="clear-search" class="clear-search" type="button" aria-label="Clear search" hidden>×</button>
+          <kbd aria-hidden="true">/</kbd>
+        </div>
+        <label class="spoiler-toggle" for="spoiler-toggle">
+          <input id="spoiler-toggle" type="checkbox" role="switch">
+          <span class="switch-track" aria-hidden="true"></span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
+          <span>Hide story spoilers</span>
+        </label>
+      </div>
+      <div id="filter-chips" class="filter-chips" role="group" aria-label="Trophy categories and missable filter"></div>
+    </section>
+
+    <div class="view-toolbar">
+      <div class="view-switch" role="group" aria-label="Guide view">
+        <button id="list-view-button" type="button" class="view-button is-active" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#icon-list"></use></svg>Trophies</button>
+        <button id="roadmap-view-button" type="button" class="view-button" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-route"></use></svg>Roadmap</button>
+      </div>
+      <div class="list-options">
+        <label class="sr-only" for="completion-filter">Filter by earned status</label>
+        <select id="completion-filter"><option value="all">All progress</option><option value="unearned">Unearned</option><option value="earned">Earned</option></select>
+        <label class="sr-only" for="sort-order">Sort trophies</label>
+        <select id="sort-order"><option value="roadmap">Roadmap order</option><option value="grade">Grade order</option><option value="name">Name A–Z</option></select>
+      </div>
+    </div>
+
+    <main id="workspace" class="workspace">
+      <section class="browser-panel" aria-label="Trophy checklist and roadmap">
+        <div class="panel-heading"><h2 id="browser-heading">THE CHECKLIST</h2><p id="results-summary" aria-live="polite">Loading 55 trophies…</p></div>
+        <div id="browser-scroll" class="browser-scroll">
+          <div id="trophy-list-view"><ul id="trophy-list" class="trophy-list"></ul></div>
+          <div id="roadmap-view-panel" class="roadmap" hidden></div>
+          <div id="empty-state" class="empty-state" hidden><svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg><h3 id="empty-title">No trophies found</h3><p id="empty-message">Try another search or category.</p><button id="reset-filters" class="button button-primary" type="button">Clear filters</button></div>
+        </div>
+        <div class="panel-footer"><span class="status-dot"></span><span id="panel-footer-text">Check a trophy when you earn it. Your route saves automatically.</span></div>
+      </section>
+
+      <aside id="detail-panel" class="detail-panel" aria-label="Selected trophy guide" tabindex="-1"><p class="detail-loading">Your next trophy brief is on its way.</p></aside>
+    </main>
+
+    <footer class="site-footer"><p><span class="footer-brand">PP /</span> Official trophy wording. Original guidance.</p><p><span class="status-dot"></span> Offline by design <span class="footer-divider">/</span> No account needed</p></footer>
+    <noscript><p class="app-status">Enable JavaScript to load the offline guide and save your progress. No internet connection is required.</p></noscript>
+  </div>
+
+  <dialog id="import-dialog" aria-labelledby="import-title" aria-describedby="import-summary">
+    <p class="eyebrow">PROGRESS BACKUP</p><h2 id="import-title">Restore your route?</h2>
+    <p id="import-summary"></p><p class="import-note">Import replaces the progress and spoiler preference saved on this device. Export your current route first if you want to keep both.</p>
+    <div class="dialog-actions"><button id="cancel-import" class="button button-quiet" type="button">Cancel</button><button id="confirm-import" class="button button-primary" type="button">Replace progress</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden><span class="status-dot"></span><span id="toast-text"></span></div>
+</body>
+</html>
