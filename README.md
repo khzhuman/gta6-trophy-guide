@@ -4,16 +4,25 @@
 
 # PLATINUM PATH
 
-An independent, offline guide and tracker for all 55 Grand Theft Auto VI trophies on PlayStation 5. Open the **Guides** view for the full list: each card pairs the official description with a numbered method, a visible missability verdict and three named citations. Use the one-click Tracker and Roadmap tabs to work through progress and the five-stage route.
+An offline, cited field guide and progress tracker for all 55 Grand Theft Auto VI PlayStation 5 trophies.
 
-Serve `app/` as the root of a local static server and open `index.html`. The app uses vanilla JavaScript, local CSS and the local trophy JSON; it needs no build step or network access. The search and category chips filter by trophy name and kind, including the dedicated Missable filter. The spoiler switch masks unearned story details in every view.
+## What is included
 
-Progress is stored in localStorage on the current browser. Export downloads a JSON backup; Import checks the file and previews its counts before replacing this device's progress. Grade totals, stage totals and earned checkboxes update with the tracker.
+- The Guides view lists every official name and description beside an original, ordered method, an honest missability verdict, and three named sources.
+- Tracker progress is saved in local storage and can be exported to or imported from a JSON backup.
+- Story spoiler protection hides unearned story names and descriptions until the setting is disabled or the trophy is earned.
+- Filters cover all, story, missable, collectibles, activities, and online trophies. The Roadmap view groups the route into five stages.
 
-The route has five stages: story and first-pass warnings (19 trophies), collectibles (2), activities and challenges (10), cumulative counts (7), and cleanup (17). Eighteen entries carry cautious first-pass flags because their descriptions do not establish a replay route. The trophy text leaves some triggers unresolved; those cards say what remains unknown rather than supplying unsupported locations or counts.
+## Run locally
 
-`app/data/trophies.json` preserves the official trophy IDs, names, descriptions and grades from the starter list. Every entry has an original guide and the requested source names: Official PlayStation trophy description, Exophase — Grand Theft Auto VI trophy list, and PSNProfiles — Grand Theft Auto VI trophy list. The app makes no network requests; source names are displayed as text.
+Serve the repository root with any local static server, then open `app/index.html`. The app has no build step, libraries, or network calls. To create the make.fun dossier, run:
 
-The project uses the kit's unchanged `main.ts` and `vendor/makefun-frontend.ts` to assemble the app, screenshots and dossier. With Node 22.18 or newer, run `MAKEFUN_OUTPUT_DIR=out node main.ts` from the repository root. The output dossier is generated from the local app files and supplied screenshots.
+```sh
+MAKEFUN_OUTPUT_DIR=out node main.ts
+```
 
-See `LICENSE`. PLATINUM PATH is an independent fan guide and uses no Rockstar logo or game artwork.
+The app data is in `app/data/trophies.json`; the entrypoint copies the static app and screenshots and builds the dossier with the provided vendor library.
+
+## Sources
+
+Each guide cites the Official PlayStation trophy description, Exophase's Grand Theft Auto VI trophy list, and PSNProfiles' Grand Theft Auto VI trophy list. Official trophy names and descriptions remain verbatim.

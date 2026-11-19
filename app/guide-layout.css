@@ -1,41 +1,5 @@
-/* The compact masthead keeps live guide cards in the first viewport. */
-.hero { padding: 20px 0 14px; }
-.hero .kicker { margin-bottom: 9px; }
-.hero h1 { font-size: 46px; }
-.hero .dek { margin: 7px 0 12px; font-size: 14px; }
-.progress-card { min-width: 305px; }
-.route-stop { padding-top: 12px; padding-bottom: 12px; }
-.data-check { min-height: 35px; gap: 16px; }
-.finder { padding-top: 12px; padding-bottom: 9px; }
-.search { height: 35px; }
-.filters { gap: 6px; }
-.filter-chip { padding-top: 5px; padding-bottom: 5px; }
-.view-bar, .view-tabs, .view-tab { min-height: 45px; height: 45px; }
-.content-view { padding-top: 17px; }
-.view-heading { margin-bottom: 12px; }
-.view-heading h2 { font-size: 27px; }
-.guide-card { padding: 16px 18px 15px; min-height: 0; }
-.guide-title { font-size: 17px; margin-top: 10px; }
-.official-copy { font-size: 11px; padding-bottom: 10px; }
-.guide-method { margin-top: 11px; }
-.guide-steps { font-size: 12px; line-height: 1.38; }
-.guide-steps li { padding-bottom: 2px; }
-.missability { margin-top: 8px; padding: 6px 8px; font-size: 11px; }
-.inline-sources { margin-top: 10px; padding-top: 8px; }
-.inline-sources .micro-heading { margin-bottom: 5px; font-size: 10px; }
-.source-list { gap: 5px 10px; }
-.source-list li { font-size: 11px; color: #62636c; }
-.earned-toggle.card-toggle { position: static; justify-content: flex-end; margin-top: 10px; }
-@media (max-width: 900px) {
-  .hero { padding-top: 25px; }
-  .hero h1 { font-size: 46px; }
-}
-@media (max-width: 600px) {
-  .hero { padding-top: 24px; }
-  .hero h1 { font-size: 40px; }
-  .hero .dek { font-size: 13px; }
-  .route-stop { padding: 10px 9px; }
-  .data-check { gap: 9px; }
-  .guide-card { padding: 15px; }
-  .guide-steps { font-size: 11px; }
-}
+/* Three readable columns make the field guide useful in wide screenshots. */
+.hero{padding-top:25px;padding-bottom:19px}.hero h1{font-size:clamp(52px,6vw,76px)}.hero .dek{font-size:16px}.data-check{gap:8px 17px}.finder{padding-top:17px;padding-bottom:13px}.content-view{padding-top:22px}.guide-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.guide-card{padding:14px 15px 12px}.guide-title{font-size:18px}.official-copy,.guide-steps{font-size:13px}.source-list li{font-size:11px}.card-toggle{display:none}
+@media(max-width:1100px){.guide-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.hero{padding-top:28px}.hero h1{font-size:58px}.guide-list{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{padding-top:25px}.hero h1{font-size:46px}.guide-steps{font-size:12px}}

@@ -3,34 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#14151a">
-  <meta name="description" content="PLATINUM PATH: an offline, cited guide to all 55 Grand Theft Auto VI PlayStation trophies.">
-  <title>PLATINUM PATH — GTA VI Trophy Guide</title>
+  <meta name="theme-color" content="#101318">
+  <meta name="description" content="PLATINUM PATH is an offline, cited guide and tracker for all 55 Grand Theft Auto VI trophies.">
+  <title>PLATINUM PATH · GTA VI trophy guide</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./guide-layout.css">
   <script src="./src/main.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Skip to the guide</a>
+  <a class="skip-link" href="#workspace">Skip to guides</a>
   <div class="shell">
     <header class="masthead">
-      <div class="brand"><span class="brand-mark">PP</span><span><b>PLATINUM PATH</b><small>THE INDEPENDENT FIELD GUIDE</small></span></div>
+      <a class="brand" href="#guides" aria-label="Platinum Path guides"><span class="brand-mark">PP</span><span><b>PLATINUM PATH</b><small>THE INDEPENDENT FIELD GUIDE</small></span></a>
       <div class="account-tools"><span class="save-state"><i></i><span id="save-status-text">Saved on this device</span></span><button id="export-button" class="quiet-button" type="button">Export</button><button id="import-button" class="quiet-button" type="button">Import</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
     </header>
     <section class="hero" aria-labelledby="page-title">
-      <div class="hero-copy"><p class="kicker">PLAYSTATION 5 <span>·</span> GRAND THEFT AUTO VI</p><h1 id="page-title">PLATINUM <em>PATH.</em></h1><p class="dek">All 55 trophies. A clear route. Guidance you can read at a glance.</p>
-        <div class="grade-line" id="grade-summary" aria-label="Progress by grade"></div>
-      </div>
+      <div class="hero-copy"><p class="kicker">PLAYSTATION 5 <span>·</span> GRAND THEFT AUTO VI</p><h1 id="page-title">PLATINUM <em>PATH.</em></h1><p class="dek">All 55 trophies. A clear route. Guidance you can read at a glance.</p><div class="grade-line" id="grade-summary" aria-label="Progress by grade"></div></div>
       <div class="progress-card"><div class="progress-number"><strong id="earned-count">0</strong><span> / 55</span></div><div class="progress-title">YOUR PLATINUM, IN PROGRESS</div><div class="progress-track"><span id="progress-fill"></span></div><p><b id="progress-percent">0%</b> complete <span class="divider">·</span> <b>18</b> first-pass warnings</p></div>
     </section>
     <section class="route-strip" aria-label="Five-stage platinum route" id="route-preview"></section>
     <section class="data-check" aria-label="Verified guide coverage"><strong>DATA CHECK</strong><span>55 official trophies</span><span>1 platinum · 2 gold · 6 silver · 46 bronze</span><span>28 hidden · 0 online</span><span>55/55 guides cite sources</span></section>
     <div id="app-status" class="notice" role="status" hidden></div>
-    <section class="finder" aria-label="Search and filter trophies">
-      <label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search trophies</span><input id="trophy-search" type="search" placeholder="Search by trophy name…" autocomplete="off"><button id="clear-search" type="button" aria-label="Clear search" hidden>×</button></label>
-      <label class="spoiler-control"><input id="spoiler-toggle" type="checkbox" role="switch"><span class="switch"></span>Hide unearned story details</label>
-      <div id="filter-chips" class="filters" role="group" aria-label="Filter trophies"></div>
-    </section>
+    <section class="finder" aria-label="Search and filter trophies"><label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search trophies</span><input id="trophy-search" type="search" placeholder="Search by trophy name…" autocomplete="off"><button id="clear-search" type="button" aria-label="Clear search" hidden>×</button></label><label class="spoiler-control"><input id="spoiler-toggle" type="checkbox" role="switch"><span class="switch"></span>Hide unearned story details</label><div id="filter-chips" class="filters" role="group" aria-label="Filter trophies"></div></section>
     <div class="view-bar"><nav class="view-tabs" aria-label="Guide views"><a href="#guides" id="guides-view-button" class="view-tab" aria-current="page">Guides <span>55</span></a><a href="#tracker" id="list-view-button" class="view-tab">Tracker</a><a href="#roadmap" id="roadmap-view-button" class="view-tab">Roadmap <span>5 stages</span></a></nav><div class="list-options" id="tracker-options" hidden><label for="completion-filter">Progress</label><select id="completion-filter"><option value="all">All</option><option value="unearned">Unearned</option><option value="earned">Earned</option></select><label for="sort-order">Sort</label><select id="sort-order"><option value="roadmap">Route</option><option value="grade">Grade</option><option value="name">A–Z</option></select></div></div>
     <main id="workspace">
       <section id="guides-view" class="content-view" aria-label="All trophy guides"><div class="view-heading"><div><p class="kicker">THE FIELD GUIDE</p><h2>Every trophy, <em>explained.</em></h2></div><p id="guide-results" class="result-count">Loading all 55 guides…</p></div><div id="guide-list" class="guide-list"></div><div id="guide-empty" class="empty-state" hidden>No matching trophies. Try another search or filter.</div></section>

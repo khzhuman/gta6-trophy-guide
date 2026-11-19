@@ -1,28 +1,26 @@
 (() => {
   "use strict";
   const app = window.PlatinumPath = window.PlatinumPath || {};
-
-  function attach(path) {
+  function loadScript(path) {
     return new Promise((resolve, reject) => {
-      const tag = document.createElement("script");
-      tag.src = new URL(path, document.baseURI).href;
-      tag.onload = resolve;
-      tag.onerror = () => reject(new Error("Could not load the local " + path + " file."));
-      document.head.append(tag);
+      const script = document.createElement("script");
+      script.src = new URL(path, document.baseURI).href;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error("Could not load the local " + path + " file."));
+      document.head.append(script);
     });
   }
-
   app.ready = (async () => {
-    await Promise.all([attach("./src/data.js"), attach("./src/tracker.js"), attach("./src/ui.js")]);
+    await Promise.all([loadScript("./src/data.js"), loadScript("./src/tracker.js"), loadScript("./src/ui.js")]);
     const data = await app.data.load();
     const tracker = app.createTracker(data);
     const ui = app.createUI(data, tracker);
     document.documentElement.dataset.ready = "true";
     return {data, tracker, ui};
   })().catch(error => {
-    const status = document.getElementById("app-status");
-    status.textContent = error.message + " Reopen the complete app folder from a local web server.";
-    status.hidden = false;
+    const notice = document.getElementById("app-status");
+    notice.textContent = error.message + " Reopen the complete app folder from a local web server.";
+    notice.hidden = false;
     document.documentElement.dataset.ready = "error";
     return null;
   });
