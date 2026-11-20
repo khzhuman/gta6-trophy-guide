@@ -1,5 +1,0 @@
-/* Three readable columns make the field guide useful in wide screenshots. */
-.hero{padding-top:25px;padding-bottom:19px}.hero h1{font-size:clamp(52px,6vw,76px)}.hero .dek{font-size:16px}.data-check{gap:8px 17px}.finder{padding-top:17px;padding-bottom:13px}.content-view{padding-top:22px}.guide-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.guide-card{padding:14px 15px 12px}.guide-title{font-size:18px}.official-copy,.guide-steps{font-size:13px}.source-list li{font-size:11px}.card-toggle{display:none}
-@media(max-width:1100px){.guide-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:900px){.hero{padding-top:28px}.hero h1{font-size:58px}.guide-list{grid-template-columns:1fr}}
-@media(max-width:600px){.hero{padding-top:25px}.hero h1{font-size:46px}.guide-steps{font-size:12px}}

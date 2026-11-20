@@ -4,25 +4,17 @@
 
 # PLATINUM PATH
 
-An offline, cited field guide and progress tracker for all 55 Grand Theft Auto VI PlayStation 5 trophies.
+An offline-first guide and progress tracker for all 55 Grand Theft Auto VI trophies on PlayStation 5. The Guides view is the landing page: every entry includes the published name, grade, description, a numbered method, missable verdict, roadmap stage, and source references.
 
-## What is included
+## Open the guide
 
-- The Guides view lists every official name and description beside an original, ordered method, an honest missability verdict, and three named sources.
-- Tracker progress is saved in local storage and can be exported to or imported from a JSON backup.
-- Story spoiler protection hides unearned story names and descriptions until the setting is disabled or the trophy is earned.
-- Filters cover all, story, missable, collectibles, activities, and online trophies. The Roadmap view groups the route into five stages.
+Serve the `app/` directory as the web root with any static file server, then open its `index.html`. Trophy data is read from `data/trophies.json` at runtime. The app makes no network requests and stores earned progress and spoiler preference in this browser.
 
-## Run locally
+## Views and progress
 
-Serve the repository root with any local static server, then open `app/index.html`. The app has no build step, libraries, or network calls. To create the make.fun dossier, run:
+- **Guides** shows the full list, searchable and filterable by story, missable, collectibles, activities, or online.
+- **Tracker** groups the checklist by the five roadmap stages and shares earned state with the guide cards.
+- **Roadmap** presents each stage with its associated trophies and first-pass cautions.
+- The spoiler switch masks unearned story names and descriptions. Export and Import move progress between browsers as JSON.
 
-```sh
-MAKEFUN_OUTPUT_DIR=out node main.ts
-```
-
-The app data is in `app/data/trophies.json`; the entrypoint copies the static app and screenshots and builds the dossier with the provided vendor library.
-
-## Sources
-
-Each guide cites the Official PlayStation trophy description, Exophase's Grand Theft Auto VI trophy list, and PSNProfiles' Grand Theft Auto VI trophy list. Official trophy names and descriptions remain verbatim.
+The Online filter explains that the official list contains no online trophies. Source numbers on each guide correspond to the dated reference legend shown at the end of the Guides view.
