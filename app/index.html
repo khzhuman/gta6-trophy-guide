@@ -1,38 +1,119 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#09131f">
-  <meta name="description" content="PLATINUM PATH is an offline, cited guide and tracker for every GTA VI trophy.">
-  <title>PLATINUM PATH · GTA VI</title>
-  <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./guide-view.css">
-  <script type="module" src="./src/main.js"></script>
-</head>
-<body>
-  <header class="topbar">
-    <a class="logo" href="#/guides" aria-label="Platinum Path home"><span class="logo-mark">PP</span><span><b>PLATINUM PATH</b><small>GTA VI FIELD GUIDE</small></span></a>
-    <div class="top-actions"><span class="saved"><i></i><span id="save-state">Saved locally</span></span><button id="export" class="button ghost" type="button">Export</button><button id="import" class="button ghost" type="button">Import</button><input id="import-file" type="file" accept="application/json,.json" hidden></div>
-  </header>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1119">
+    <title>PLATINUM PATH — GTA VI Trophy Guide</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./guide-view.css">
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><span class="brand">PLATINUM PATH</span> <span class="muted">— GTA VI Trophy Guide</span></h1>
+      <div class="top-actions">
+        <strong id="progress-text" aria-live="polite">Loading progress…</strong>
+        <button type="button" id="export">Export</button>
+        <button type="button" id="import">Import</button>
+        <input id="import-file" type="file" accept="application/json,.json" hidden>
+        <label class="spoiler">
+          <input id="spoiler" type="checkbox" checked>
+          Spoiler shield <b id="shield-state">ON</b>
+        </label>
+      </div>
+    </header>
 
-  <main>
-    <section class="hero" aria-labelledby="title">
-      <div><p class="eyebrow">PLAYSTATION 5 <span>·</span> GRAND THEFT AUTO VI</p><h1 id="title">PLATINUM <em>PATH.</em></h1><p class="intro">A complete, offline route through all 55 trophies.</p></div>
-      <div class="progress-card"><div><strong id="earned-count">0</strong><span>/55 earned</span></div><p class="progress-label">PLATINUM PROGRESS</p><div class="progress-bar"><span id="progress-fill"></span></div><p><b id="progress-percent">0%</b> complete</p></div>
-    </section>
-    <section class="metrics" aria-label="Progress by grade and stage"><div class="grade-metrics" id="grade-metrics"></div><div class="stage-metrics" id="stage-metrics"></div></section>
-    <section class="data-check"><b>DATA CHECK</b><span>55 official trophies</span><span>1 platinum · 2 gold · 6 silver · 46 bronze</span><span>55/55 guides cite sources</span><span>18 missable flagged</span><span>works fully offline</span></section>
-    <div id="notice" class="notice" hidden></div>
+    <div class="notice" id="notice" role="status" hidden></div>
+    <section class="audit" id="audit" aria-label="Live data audit"></section>
+    <section class="stage-strip" id="stage-metrics" aria-label="Roadmap stage progress"></section>
 
-    <section class="controls" aria-label="Find trophies"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search trophy names" aria-label="Search trophy names"><button id="clear" type="button" aria-label="Clear search" hidden>×</button></label><div id="filters" class="filter-row" role="group" aria-label="Trophy filters"></div><label class="spoiler"><input id="spoiler" type="checkbox"><span class="toggle"></span>Hide unearned story details</label></section>
+    <nav class="tabs" aria-label="Views">
+      <a href="#/guides" data-view="guides">Working guide</a>
+      <a href="#/tracker" data-view="tracker">Full tracker</a>
+      <a href="#/roadmap" data-view="roadmap">Roadmap</a>
+      <a href="#/spoiler" data-view="spoiler">Spoilers &amp; backups</a>
+      <span id="save-state">Saved locally · offline ready</span>
+    </nav>
 
-    <nav class="tabs" aria-label="Views"><a href="#/guides" data-view="guides">Guides <span>55</span></a><a href="#/tracker" data-view="tracker">Tracker</a><a href="#/roadmap" data-view="roadmap">Roadmap <span>5 stages</span></a></nav>
-    <section id="guides-view" class="view" aria-label="Guides view"><div class="view-heading"><div><p class="eyebrow">THE FIELD GUIDE</p><h2>Every trophy, <em>explained.</em></h2></div><p id="guide-count" class="muted"></p></div><div id="guide-list" class="guide-list"></div><div id="guide-empty" class="empty" hidden></div><section class="sources"><div><p class="eyebrow">REFERENCE DESK</p><h2>Sources</h2></div><ol id="source-list"></ol></section></section>
-    <section id="tracker-view" class="view" aria-label="Tracker view" hidden><div class="view-heading"><div><p class="eyebrow">YOUR CHECKLIST</p><h2>Track the <em>route.</em></h2></div><p id="tracker-count" class="muted"></p></div><div id="tracker-list" class="tracker-list"></div><div id="tracker-empty" class="empty" hidden></div></section>
-    <section id="roadmap-view" class="view" aria-label="Roadmap view" hidden><div class="view-heading"><div><p class="eyebrow">FIVE STAGES TO PLATINUM</p><h2>The road, <em>at a glance.</em></h2></div><p class="muted">Follow the stages in order; missables stay visible.</p></div><div id="roadmap-list" class="roadmap-list"></div></section>
-  </main>
-  <footer><span>PLATINUM PATH / OFFICIAL WORDING · ORIGINAL GUIDANCE</span><span>OFFLINE BY DESIGN · NO ACCOUNT NEEDED</span></footer>
-</body>
+    <main>
+      <section class="view workspace" id="guides-view" aria-label="Working guide">
+        <aside class="panel checklist-panel">
+          <div class="panel-heading">
+            <h2>TRACKER CHECKLIST</h2>
+            <span class="muted" id="shown-count"></span>
+          </div>
+          <div class="tracker-controls">
+            <label class="search">
+              <span aria-hidden="true">⌕</span>
+              <input id="search" type="search" placeholder="Find a trophy…" aria-label="Search trophies">
+              <button id="clear" type="button" aria-label="Clear search" hidden>×</button>
+            </label>
+            <div class="filters" id="filters" aria-label="Trophy filters"></div>
+          </div>
+          <div class="scroll-region" id="checklist"></div>
+        </aside>
+
+        <article class="panel detail-panel" id="detail" aria-label="Selected trophy guide"></article>
+
+        <aside class="right-rail">
+          <section class="panel source-panel">
+            <div class="panel-heading">
+              <h2>SOURCE DESK</h2>
+              <span class="muted">local index</span>
+            </div>
+            <ol id="source-list"></ol>
+          </section>
+          <section class="panel next-panel">
+            <div class="panel-heading"><h2>NEXT UP — ROADMAP ORDER</h2></div>
+            <div id="next-list"></div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="view alternate" id="tracker-view" aria-label="Full tracker" hidden>
+        <div class="view-heading">
+          <div><p class="eyebrow">ALL STAGES · ONE CHECKLIST</p><h2>Your trophy tracker</h2></div>
+          <span class="muted" id="tracker-count"></span>
+        </div>
+        <div class="full-grid" id="tracker-list"></div>
+      </section>
+
+      <section class="view alternate" id="roadmap-view" aria-label="Roadmap" hidden>
+        <div class="view-heading">
+          <div><p class="eyebrow">THE ROUTE TO PLATINUM</p><h2>Five stages. Every trophy.</h2></div>
+          <span class="muted">First-pass warnings stay on the route.</span>
+        </div>
+        <div class="roadmap-grid" id="roadmap-list"></div>
+      </section>
+
+      <section class="view alternate" id="spoiler-view" aria-label="Spoilers and backups" hidden>
+        <div class="view-heading">
+          <div><p class="eyebrow">LOCAL BY DESIGN</p><h2>Spoilers &amp; progress backups</h2></div>
+        </div>
+        <div class="backup-grid">
+          <section class="panel backup-card">
+            <h3>Spoiler shield</h3>
+            <p>Shield unearned story names, descriptions and methods throughout the app. Earned story trophies are revealed.</p>
+            <button id="shield-action" type="button"></button>
+          </section>
+          <section class="panel backup-card">
+            <h3>Your progress travels with you</h3>
+            <p>Export earned trophies and your spoiler setting as JSON. Import a previous PLATINUM PATH backup to restore the same progress.</p>
+            <div class="button-row">
+              <button id="backup-export" type="button">Export progress</button>
+              <button id="backup-import" type="button">Import progress</button>
+            </div>
+            <p class="muted">Import replaces earned progress. Meditation counts are saved separately on this device.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>OFFICIAL WORDING · CITED STEPS · YOUR LOCAL PROGRESS</span>
+      <span>NO ACCOUNT · NO NETWORK ASSETS</span>
+    </footer>
+  </body>
 </html>
